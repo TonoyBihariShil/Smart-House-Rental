@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 
 public class CommentsActivity extends AppCompatActivity {
 
+    //---------xml instance---------------
     private RecyclerView recyclerView;
     private EditText inputComments;
 
