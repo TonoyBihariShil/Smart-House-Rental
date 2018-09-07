@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smarthouserental">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.SplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".landloardview.ProfileUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.TypeOfUserActivity" />
+        <activity
+            android:name=".landloardview.LandLoardPostAddActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smarthouserental.activities.TypeOfUserActivity" />
+        </activity>
+        <activity
+            android:name=".landloardview.LandLoardCurrentProfileActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smarthouserental.landloardview.LandLoardPostAddActivity" />
+        </activity>
+        <activity
+            android:name=".landloardview.LandLoardPostActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smarthouserental.landloardview.LandLoardPostAddActivity" />
+        </activity>
+        <activity
+            android:name=".landloardview.PostImageDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".landloardview.LandLoardProfileEditActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smarthouserental.landloardview.LandLoardCurrentProfileActivity" />
+        </activity>
+        <activity android:name=".rentalview.RentalPostViewActivity" />
+        <activity
+            android:name=".rentalview.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.CommentsActivity" />
+        <activity android:name=".activities.ReplayActivity" />
+        <activity android:name=".landloardview.LandLordPostUpdate">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smarthouserental.landloardview.LandLoardPostActivity" />
+        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activities.DirectionActivity"
+            android:label="@string/title_activity_direction">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.smarthouserental.rentalview.RentalPostViewActivity" />
+
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.smarthouserental.activities.TypeOfUserActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="170dp"
+            android:layout_height="170dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                style="@style/backgroundTint"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:background="@drawable/home_icon"
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/home_icon_1"
+                android:contentDescription="@string/app_name" />
+
+        </RelativeLayout>
+
+        <Button
+            android:background="@drawable/button_bg"
+            android:onClick="landOfLoard"
+            android:text="@string/land_lord"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            android:layout_width="250dp"
+            android:layout_height="40dp" />
+
+        <Button
+            android:background="@drawable/button_bg"
+            android:text="@string/rental"
+            android:onClick="rental"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            android:layout_width="250dp"
+            android:layout_height="40dp" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Smart House Rental</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="login">Login Now</string>
+    <string name="continue_with_phone_number">Continue With Phone Number</string>
+    <string name="save">Save</string>
+    <string name="enter_name">Enter name</string>
+    <string name="enter_email">Email</string>
+    <string name="land_lord">Land Lord</string>
+    <string name="rental">Rental</string>
+    <string name="post">post</string>
+    <string name="enter_details">Enter Details</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="title_activity_direction">Map</string>
+</resources>

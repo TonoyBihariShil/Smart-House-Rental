@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".landloardview.LandLordPostUpdate">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:theme="@style/ToolbarTheme"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    style="@style/backgroundTint"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    android:background="@drawable/home_icon"
+                    android:contentDescription="@string/app_name" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/home_icon_1"
+                    android:contentDescription="@string/app_name" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:text="Enter Address:"
+                android:textColor="@color/transparent_black"
+                android:layout_marginStart="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/address"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/et_bg"
+                android:paddingEnd="0dp"
+                android:paddingStart="10dp" />
+
+            <TextView
+                android:text="Enter Asking Rate:"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/transparent_black"
+                android:layout_marginStart="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/askingRate"
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/et_bg"
+                android:paddingEnd="0dp"
+                android:paddingStart="10dp" />
+
+            <TextView
+                android:text="Enter Details:"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/transparent_black"
+                android:layout_marginStart="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/et_bg"
+                android:paddingEnd="0dp"
+                android:paddingStart="10dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="Select Type :"
+                    android:textColor="@color/black" />
+
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Update"
+        android:onClick="updatePost"
+        android:textColor="@color/white"
+        android:background="@drawable/button_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

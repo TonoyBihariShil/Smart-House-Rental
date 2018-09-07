@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "773230691635",
+    "firebase_url": "https://smart-house-rental-158f0.firebaseio.com",
+    "project_id": "smart-house-rental-158f0",
+    "storage_bucket": "smart-house-rental-158f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773230691635:android:f3b8cc99453f7b97",
+        "android_client_info": {
+          "package_name": "com.smarthouserental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773230691635-ohasok3o3rrnpncudhsoe2sere8raplj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smarthouserental",
+            "certificate_hash": "d841f27b290eff96f627578d23d4117df11fc417"
+          }
+        },
+        {
+          "client_id": "773230691635-bkic8l1lib9gh21ruioh6pn89d89n68g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdBjOfMBoX7wkmfURUd4sP0plb_usQdDA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773230691635-bkic8l1lib9gh21ruioh6pn89d89n68g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

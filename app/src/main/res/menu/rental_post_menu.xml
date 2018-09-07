@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@mipmap/ic_setings"
+        android:title="Settings"
+        app:showAsAction="always"/>
+
+   <!-- <item
+        android:id="@+id/all"
+        android:title="All"/>
+
+    <item
+        android:id="@+id/shukrabad"
+        android:title="Shukrabad"/>
+
+    <item
+        android:id="@+id/farmgate"
+        android:title="Farmgate"/>
+
+    <item
+        android:id="@+id/samoli"
+        android:title="Samoli"/>
+
+    <item
+        android:id="@+id/mohammadpur"
+        android:title="Mohammadpur"/>
+
+    <item
+        android:id="@+id/dhanmondi32"
+        android:title="Dhanmondi32"/>-->
+
+</menu>

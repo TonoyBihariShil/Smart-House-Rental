@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.smarthouserental.rentalview.SettingsActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+  <ScrollView
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:text="Rental Search Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_marginTop="10dp"
+                android:background="#AEAEAE"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <RadioGroup
+                android:id="@+id/rentalTypeRadioGroup"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <RadioButton
+                    android:textIsSelectable="true"
+                    android:text="Family"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:text="Bachelor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:text="Rental Search Area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_marginTop="10dp"
+                android:background="#AEAEAE"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <RadioGroup
+                android:id="@+id/rentalSearchRadioGroup"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <RadioButton
+                    android:text="Shukrabad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:text="Shamoli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:text="Firmgate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:text="Mohammadpur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:text="Dhanmondi32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+  </ScrollView>
+
+</LinearLayout>
