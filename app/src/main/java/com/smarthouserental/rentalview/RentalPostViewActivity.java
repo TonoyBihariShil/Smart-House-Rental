@@ -1,5 +1,6 @@
 package com.smarthouserental.rentalview;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,7 +51,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RentalPostViewActivity extends AppCompatActivity {
+public class RentalPostViewActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private FirebaseFirestore postDb,userDb;
     private RecyclerView recyclerView;
@@ -59,6 +65,9 @@ public class RentalPostViewActivity extends AppCompatActivity {
     private TextView noMatchFoundText;
 
 
+    private GoogleApiClient googleApiClient;
+
+
 
 
     @Override
@@ -69,24 +78,124 @@ public class RentalPostViewActivity extends AppCompatActivity {
         //-------------------action bar----------------
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Rental Feed");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        getLocation();
+        buildGoogleApiClient();
 
         recyclerView = findViewById(R.id.recyclerView);
         noMatchFoundText = findViewById(R.id.no_match_found_text);
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adepter = new RentalPostAdepter(rentalPostList,RentalPostViewActivity.this);
+        adepter = new RentalPostAdepter(rentalPostList, RentalPostViewActivity.this);
         recyclerView.setAdapter(adepter);
 
-        areaSP = SharedPrefHelper.getRentalArea(SharedPrefHelper.RENTAL_AREA,RentalPostViewActivity.this);
-        typeSP = SharedPrefHelper.getRentalType(SharedPrefHelper.RENTAL_TYPE,RentalPostViewActivity.this);
+        areaSP = SharedPrefHelper.getRentalArea(SharedPrefHelper.RENTAL_AREA, RentalPostViewActivity.this);
+        typeSP = SharedPrefHelper.getRentalType(SharedPrefHelper.RENTAL_TYPE, RentalPostViewActivity.this);
 
 
+    }
+
+ /*   private void getLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                (getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions((Activity)getApplicationContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+            sourceLatLng = new LatLng(23.772226, 90.367687);
+
+        } else {
+            if (locationManager != null){
+                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
+
+                if (location != null) {
+                    sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
+                } else  if (location1 != null) {
+                    sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
+                } else  if (location2 != null) {
+                    sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
+                }else {
+                    Toast.makeText(getApplicationContext(),"location not found. Please reboot your device",Toast.LENGTH_SHORT).show();
+                    sourceLatLng = new LatLng(23.772226, 90.367687);
+                }
+            }
+
+        }
+    }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.rental_post_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            super.onBackPressed();
+            finish();
+        }else if (item.getItemId() == R.id.action_settings){
+            startActivity(new Intent(RentalPostViewActivity.this,SettingsActivity.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void buildGoogleApiClient() {
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+
+        googleApiClient.connect();
+    }
+
+
+    @Override
+    public void onConnected(@android.support.annotation.Nullable Bundle bundle) {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null){
+            sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
+            if (googleApiClient != null){
+                googleApiClient.disconnect();
+                loadDataFromServer();
+            }
+        }else {
+            Toast.makeText(getApplicationContext(),"Device location not found",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+
+    private void loadDataFromServer(){
         postDb = FirebaseFirestore.getInstance();
         userDb = FirebaseFirestore.getInstance();
         postDb.collection("landLoardPost").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
@@ -153,51 +262,4 @@ public class RentalPostViewActivity extends AppCompatActivity {
         });
     }
 
-    private void getLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions((Activity)getApplicationContext(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-            sourceLatLng = new LatLng(23.772226, 90.367687);
-
-        } else {
-            if (locationManager != null){
-                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
-
-                if (location != null) {
-                    sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
-                } else  if (location1 != null) {
-                    sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
-                } else  if (location2 != null) {
-                    sourceLatLng = new LatLng(location.getLatitude(),location.getLongitude());
-                }else {
-                    Toast.makeText(getApplicationContext(),"location not found. Please reboot your device",Toast.LENGTH_SHORT).show();
-                    sourceLatLng = new LatLng(23.772226, 90.367687);
-                }
-            }
-
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.rental_post_menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
-            super.onBackPressed();
-            finish();
-        }else if (item.getItemId() == R.id.action_settings){
-            startActivity(new Intent(RentalPostViewActivity.this,SettingsActivity.class));
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

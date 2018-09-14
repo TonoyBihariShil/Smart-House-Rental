@@ -36,7 +36,7 @@ public class ProfileUpdateActivity extends AppCompatActivity {
     private CircleImageView profileImage;
 
     //---------------class instance----------------
-    private Uri imageUri;
+    private Uri imageUri = null;
     private int GALLERY_REQUEST_CODE = 1;
     private ProgressDialog progressDialog;
 
@@ -106,7 +106,8 @@ public class ProfileUpdateActivity extends AppCompatActivity {
         }
 
         if (imageUri == null){
-            Toast.makeText(getApplicationContext(),"upload profile iamge",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"upload profile image",Toast.LENGTH_SHORT).show();
+            return;
         }
 
         progressDialog.show();
@@ -150,14 +151,14 @@ public class ProfileUpdateActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(),"something went worng. please try again",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"something went wrong. please try again",Toast.LENGTH_SHORT).show();
                             progressDialog.dismiss();
                         }
                     });
 
 
                 } else {
-                   Toast.makeText(getApplicationContext(),"something went worng. please try again",Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(),"something went wrong. please try again",Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }

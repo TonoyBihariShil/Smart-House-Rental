@@ -57,12 +57,7 @@ public class LandLoardPostActivity extends AppCompatActivity {
         db.collection("landLoardPost").addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
-                if (queryDocumentSnapshots.size()<= 0){
-                    noPostPublishText.setVisibility(View.VISIBLE);
-                }else {
-                    noPostPublishText.setVisibility(View.GONE);
-                }
+                noPostPublishText.setVisibility(View.VISIBLE);
                 if (queryDocumentSnapshots != null){
                     for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()){
                         if (doc.getType() == DocumentChange.Type.ADDED){
@@ -70,6 +65,7 @@ public class LandLoardPostActivity extends AppCompatActivity {
                             if (post.getUserId().equals(SharedPrefHelper.getKey("userId",LandLoardPostActivity.this))){
                                 landLoardPostList.add(post);
                                 adepter.notifyDataSetChanged();
+                                noPostPublishText.setVisibility(View.GONE);
                             }
                         }
                     }
