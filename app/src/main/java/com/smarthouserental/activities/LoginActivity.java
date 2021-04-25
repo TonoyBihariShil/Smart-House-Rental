@@ -5,9 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +28,7 @@ import com.smarthouserental.pref.SharedPrefHelper;
 import com.smarthouserental.util.Utils;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,8 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         //-----------check user already logged in or not?---------------
 
         if (Utils.haveNetworkConnection(LoginActivity.this)){
-            auth = FirebaseAuth.getInstance();
-            if (auth.getCurrentUser() != null){
+            auth=FirebaseAuth.getInstance();
+            if (auth.getCurrentUser()!=null){
                 checkUserStatus();
             }
         }
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 auth = FirebaseAuth.getInstance();
                 if (Utils.haveNetworkConnection(LoginActivity.this)){
                     auth = FirebaseAuth.getInstance();
-                    if (auth.getCurrentUser() != null){
+                    if (auth.getCurrentUser()!=null){
                         checkUserStatus();
                     }
                 }
@@ -109,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             // Successfully signed in
             if (resultCode == RESULT_OK) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("users").document(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                db.collection("users").document(Objects.requireNonNull(auth.getCurrentUser()).getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.getResult().exists()){
@@ -131,16 +132,18 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
 
                             }else {
+                                assert response != null;
                                 SharedPrefHelper.putKey(LoginActivity.this,"phoneNumber",response.getPhoneNumber());
                                 SharedPrefHelper.putKey(LoginActivity.this,"userId",auth.getCurrentUser().getUid());
-                                startActivity(new Intent(LoginActivity.this,ProfileUpdateActivity.class));
+                                //startActivity(new Intent(LoginActivity.this,ProfileUpdateActivity.class));
                                 finish();
                             }
 
                         }else {
+                            assert response != null;
                             SharedPrefHelper.putKey(LoginActivity.this,"phoneNumber",response.getPhoneNumber());
                             SharedPrefHelper.putKey(LoginActivity.this,"userId",auth.getCurrentUser().getUid());
-                            startActivity(new Intent(LoginActivity.this,ProfileUpdateActivity.class));
+                           // startActivity(new Intent(LoginActivity.this,ProfileUpdateActivity.class));
                             finish();
                         }
                     }
@@ -158,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                if (Objects.requireNonNull(response.getError()).getErrorCode() == ErrorCodes.NO_NETWORK) {
 
                     return;
                 }
@@ -171,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
     private void checkUserStatus(){
         progressDialog.show();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("users").document(auth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("users").document(Objects.requireNonNull(auth.getCurrentUser()).getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.getResult().exists()){

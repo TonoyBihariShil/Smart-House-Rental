@@ -1,52 +1,45 @@
 {
   "project_info": {
-    "project_number": "773230691635",
-    "firebase_url": "https://smart-house-rental-158f0.firebaseio.com",
-    "project_id": "smart-house-rental-158f0",
-    "storage_bucket": "smart-house-rental-158f0.appspot.com"
+    "project_number": "926242344889",
+    "firebase_url": "https://smart-house-rental-pro.firebaseio.com",
+    "project_id": "smart-house-rental-pro",
+    "storage_bucket": "smart-house-rental-pro.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:773230691635:android:f3b8cc99453f7b97",
+        "mobilesdk_app_id": "1:926242344889:android:293335698431ed4b383068",
         "android_client_info": {
           "package_name": "com.smarthouserental"
         }
       },
       "oauth_client": [
         {
-          "client_id": "773230691635-ohasok3o3rrnpncudhsoe2sere8raplj.apps.googleusercontent.com",
+          "client_id": "926242344889-157kdoajln5a61atdb1gbrl3mjl0tpsk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.smarthouserental",
-            "certificate_hash": "d841f27b290eff96f627578d23d4117df11fc417"
+            "certificate_hash": "7dd084b4979978aa323f7ea59b2ca29e79c5b302"
           }
         },
         {
-          "client_id": "773230691635-bkic8l1lib9gh21ruioh6pn89d89n68g.apps.googleusercontent.com",
+          "client_id": "926242344889-n3ad2j1b84nnpl58o3740dmhs0dkronv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDdBjOfMBoX7wkmfURUd4sP0plb_usQdDA"
+          "current_key": "AIzaSyDIcQG0SrdsAm4ehj4_Smv8GdgMAXyL3Lg"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "773230691635-bkic8l1lib9gh21ruioh6pn89d89n68g.apps.googleusercontent.com",
+              "client_id": "926242344889-n3ad2j1b84nnpl58o3740dmhs0dkronv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
